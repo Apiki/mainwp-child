@@ -1,0 +1,35 @@
+# ignore IDE and OS files
+.idea
+.vscode
+
+### ignore all files in root ###
+/*.*
+
+### npm e composer ###
+node_modules
+
+### ignore log files and databases ###
+.devilbox
+.phpintel
+.DS_Store
+*.log
+*.sql
+*.sqlite
+*.zip
+*.tgz
+*.gz
+*.tar
+
+### files to keep ###
+!.gitignore
+!.github
+!/class
+!/css
+!/images
+!/includes
+!/languages
+!/libs
+!index.html
+!mainwp-child.php
+!privacy-policy.txt
+!readme.txt
