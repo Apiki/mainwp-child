@@ -12,9 +12,6 @@
  * Author URI: http://ithemes.com/
  * iThemes Package: backupbuddy
  *
- * The code is used for the MainWP Buddy Extension
- * Extension URL: https://mainwp.com/extension/mainwpbuddy/
- *
  * @package MainWP\Child
  */
 
@@ -359,7 +356,7 @@ class MainWP_Child_Back_Up_Buddy {
 		if ( ! isset( \pb_backupbuddy::$options ) ) {
 			\pb_backupbuddy::load();
 		}
-		
+
 		$mwp_action = MainWP_System::instance()->validate_params( 'mwp_action' );
 		if ( ! empty( $mwp_action ) ) {
 			switch ( $mwp_action ) {
@@ -1949,8 +1946,8 @@ class MainWP_Child_Back_Up_Buddy {
 			'html_log' => $html,
 		);
 	}
-	
-	
+
+
 	/**
 	 * Pretty results.
 	 *
@@ -1965,7 +1962,7 @@ class MainWP_Child_Back_Up_Buddy {
 			return '<span class="pb_label pb_label-important">Fail</span>';
 		}
 	}
-				
+
 
     /**
      * View details.

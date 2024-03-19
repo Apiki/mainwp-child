@@ -289,7 +289,7 @@ class MainWP_Child_Branding_Render {
 				if ( typeof( pagenow ) !== 'undefined' && pagenow === 'plugins' ) {
 					<?php
 					// hide update notice row.
-					if ( in_array( 'mainwp-child/mainwp-child.php', $hide_slugs ) ) {
+					if ( in_array( 'mainwp-child/main-wpdash-child.php', $hide_slugs ) ) {
 						?>
 						var el = document.querySelector( 'tr#mainwp-child-update' );
 						if ( typeof( el ) !== 'undefined' && el !== null ) {

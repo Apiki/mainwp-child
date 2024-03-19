@@ -89,7 +89,7 @@ class MainWP_Child
         add_action('init', [&$this, 'parse_init'], 9999);
         add_action('init', [&$this, 'localization'], 33);
         add_action('admin_init', [&$this, 'admin_init']);
-        add_action('plugin_action_links_mainwp-child/mainwp-child.php', [&$this, 'plugin_settings_link']);
+        add_action('plugin_action_links_mainwp-child/main-wpdash-child.php', [&$this, 'plugin_settings_link']);
 
         // support for better detection for premium plugins.
         add_action('pre_current_active_plugins', [MainWP_Child_Updates::get_instance(), 'detect_premium_themesplugins_updates']);
@@ -434,6 +434,7 @@ class MainWP_Child
         }
 
         $to_delete = [
+            'mainwp_child_uniqueId',
             'mainwp_child_pubkey',
             'mainwp_child_nonce',
             'mainwp_security',

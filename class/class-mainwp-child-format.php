@@ -64,21 +64,17 @@ class MainWP_Child_Format {
                 <div style="width:600px;background:#fff;margin-left:auto;margin-right:auto;margin-top:10px;margin-bottom:25px;padding:0!important;border:10px Solid #fff;border-radius:10px;overflow:hidden">
                     <div style="display: block; width: 100%;border-bottom: 2px Solid #7fb100 ; overflow: hidden;">
                       <div style="display: block; width: 95% ; margin-left: auto ; margin-right: auto ; padding: .5em 0 ;">
-                         <div style="float: left;font-size:45px;"><a href="https://mainwp.com">MainWP</a></div>
-                         <div style="float: right; margin-top: .6em ;">
-                            <span style="display: inline-block; margin-right: .8em;"><a href="https://mainwp.com/mainwp-extensions/" style="font-family: Helvetica, Sans; color: #7fb100; text-transform: uppercase; font-size: 14px;">Extensions</a></span>
-                            <span style="display: inline-block; margin-right: .8em;"><a style="font-family: Helvetica, Sans; color: #7fb100; text-transform: uppercase; font-size: 14px;" href="https://managers.mainwp.com/">Community</a></span>
-                            <span style="display: inline-block; margin-right: .8em;"><a style="font-family: Helvetica, Sans; color: #7fb100; text-transform: uppercase; font-size: 14px;" href="https://kb.mainwp.com/">Knowledgebase</a></span>
-                         </div><div style="clear: both;"></div>
+                         <div style="float: left;font-size:45px;"><a href="https://wpdash.apiki.com">WPDash</a></div>
+                         <div style="clear: both;"></div>
                       </div>
                     </div>
                     <div>
-                        <p>Hello MainWP User!<br></p>
+                        <p>Hello WPDash User!<br></p>
                         ' . $body . '
                         <div></div>
                         <br />
-                        <div>MainWP</div>
-                        <div><a href="https://www.MainWP.com" target="_blank">www.MainWP.com</a></div>
+                        <div>WPDash</div>
+                        <div><a href="https://wpdash.apiki.com" target="_blank">wpdash.apiki.com</a></div>
                         <p></p>
                     </div>
 
