@@ -1293,9 +1293,9 @@ class MainWP_Child_Server_Information extends MainWP_Child_Server_Information_Ba
 		foreach ( $lines as $key => $line ) {
 
 			if ( false !== strpos( $line, ']' ) ) {
-				[ $time, $error ] = explode( ']', $line, 2 );
+				list( $time, $error ) = explode( ']', $line, 2 );
 			} else {
-				[ $time, $error ] = array( '', $line );
+				list( $time, $error ) = array( '', $line );
 			}
 
 			$time          = trim( $time, '[]' );
