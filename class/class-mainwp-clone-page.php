@@ -217,7 +217,7 @@ class MainWP_Clone_Page {
 				<?php esc_html_e( 'A database only backup will not work.', 'mainwp-child' ); ?></em>
 				<br/>
 				<br/>
-				<form action="<?php echo esc_attr( admin_url( 'options-general.php?page=mainwp_child_tab&tab=restore-clone&upload=yes' ) ); ?>" method="post" enctype="multipart/form-data">
+				<form action="<?php echo esc_attr( admin_url( 'options-general.php?page=wpdash_child_tab&tab=restore-clone&upload=yes' ) ); ?>" method="post" enctype="multipart/form-data">
 					<input type="file" name="file" id="file"/>
 					<input type="submit" name="submit" id="filesubmit" class="button button-primary" disabled="disabled" value="<?php esc_attr_e( 'Clone/Restore Website', 'mainwp-child' ); ?>"/>
 					<input type="hidden" name="_nonce" value="<?php echo esc_html( wp_create_nonce( 'cloneRestore' ) ); ?>" />
@@ -309,7 +309,7 @@ class MainWP_Clone_Page {
 							<?php echo esc_html( $branding_msg ); ?><br/>
 							<?php esc_html_e( 'A database only backup will not work.', 'mainwp-child' ); ?>
 						</em><br/><br/>
-					<form action="<?php echo esc_attr( admin_url( 'options-general.php?page=mainwp_child_tab&tab=restore-clone&upload=yes' ) ); ?>" method="post" enctype="multipart/form-data">
+					<form action="<?php echo esc_attr( admin_url( 'options-general.php?page=wpdash_child_tab&tab=restore-clone&upload=yes' ) ); ?>" method="post" enctype="multipart/form-data">
 						<input type="file" name="file" id="file" />
 						<input type="submit" name="submit" class="button button-primary" id="filesubmit" disabled="disabled" value="<?php esc_attr_e( 'Restore Website', 'mainwp-child' ); ?>"/>
 						<input type="hidden" name="_nonce" value="<?php echo esc_html( wp_create_nonce( 'cloneRestore' ) ); ?>" />
@@ -344,7 +344,7 @@ class MainWP_Clone_Page {
 		// phpcs:disable WordPress.Security.NonceVerification
 		$page         = isset( $_REQUEST['page'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['page'] ) ) : '';
 		$sitesToClone = get_option( 'mainwp_child_clone_sites' );
-		$url          = admin_url( 'options-general.php?page=mainwp_child_tab&tab=restore-clone#title_03' );
+		$url          = admin_url( 'options-general.php?page=wpdash_child_tab&tab=restore-clone#title_03' );
 		$dirs         = MainWP_Helper::get_mainwp_dir( 'backup', false );
 		$current_dir  = $dirs[0];
 		$backup_dir   = $current_dir;

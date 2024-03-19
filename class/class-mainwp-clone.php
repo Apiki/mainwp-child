@@ -308,7 +308,7 @@ class MainWP_Clone {
 		global $wp_version;
 		$includeCoreFiles = ( $wpversion !== $wp_version );
 		$excludes         = ( isset( $_POST['exclude'] ) ? explode( ',', wp_unslash( $_POST['exclude'] ) ) : array() ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-		$excludes[]       = str_replace( ABSPATH, '', WP_CONTENT_DIR ) . '/uploads/mainwp';
+		$excludes[]       = str_replace( ABSPATH, '', WP_CONTENT_DIR ) . '/uploads/wpdash';
 		$uploadDir        = MainWP_Helper::get_mainwp_dir();
 		$uploadDir        = $uploadDir[0];
 		$excludes[]       = str_replace( ABSPATH, '', $uploadDir );

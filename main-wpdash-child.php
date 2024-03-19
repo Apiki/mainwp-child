@@ -1,18 +1,18 @@
 <?php
 /**
- * MainWP Child Plugin
+ * Main WPDash Child Plugin
  *
  * @package MainWP\Child
  */
 
 /**
- * Plugin Name: MainWP Child
- * Description: Provides a secure connection between your MainWP Dashboard and your WordPress sites. MainWP allows you to manage WP sites from one central location. Plugin documentation and options can be found here https://kb.mainwp.com/.
- * Plugin URI: https://mainwp.com/
- * Author: MainWP
- * Author URI: https://mainwp.com
+ * Plugin Name: WPDash Child
+ * Description: Provides a secure connection between your WPDash and your WordPress sites. WPDash allows you to manage WP sites from one central location.
+ * Plugin URI: https://wpdash.apiki.com/
+ * Author: Apiki
+ * Author URI: https://apiki.com
  * Text Domain: mainwp-child
- * Version: 4.6
+ * Version: 4.9.9
  * Requires at least: 5.4
  * Requires PHP: 7.4
  */

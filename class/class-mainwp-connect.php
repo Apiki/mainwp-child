@@ -605,7 +605,7 @@ class MainWP_Connect {
 			} elseif ( isset( $_POST['file'] ) ) {
 				$file = ! empty( $_POST['file'] ) ? sanitize_text_field( wp_unslash( $_POST['file'] ) ) : '';
 			}
-			$where = 'admin.php?page=mainwp_child_tab&tab=restore-clone';
+			$where = 'admin.php?page=wpdash_child_tab&tab=restore-clone';
 			if ( '' === session_id() ) {
 				session_start();
 			}

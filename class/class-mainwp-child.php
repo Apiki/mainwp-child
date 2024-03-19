@@ -34,7 +34,7 @@ class MainWP_Child
      *
      * @var string MainWP Child plugin version.
      */
-    public static $version = '4.6';
+    public static $version = '4.9.9';
 
     /**
      * Private variable containing the latest MainWP Child update version.
@@ -503,7 +503,7 @@ class MainWP_Child
      */
     public function plugin_settings_link($actions)
     {
-        $href = admin_url('options-general.php?page=mainwp_child_tab');
+        $href = admin_url('options-general.php?page=wpdash_child_tab');
         $settings_link = '<a href="'.$href.'">'.__('Settings').'</a>'; // phpcs:ignore WordPress.WP.I18n.MissingArgDomain
         array_unshift($actions, $settings_link);
 

@@ -29,42 +29,42 @@ class MainWP_Child_Themes_Check {
 	 *
 	 * @var string
 	 */
-	private $cron_name_watcher = 'mainwp_child_cron_theme_health_check_watcher';
+	private $cron_name_watcher = 'wpdash_child_cron_theme_health_check_watcher';
 
 	/**
 	 * Cron: Theme health check daily.
 	 *
 	 * @var string
 	 */
-	private $cron_name_daily = 'mainwp_child_cron_theme_health_check_daily';
+	private $cron_name_daily = 'wpdash_child_cron_theme_health_check_daily';
 
 	/**
 	 * Cron: Theme health check batching.
 	 *
 	 * @var string
 	 */
-	private $cron_name_batching = 'mainwp_child_cron_theme_health_check_batching';
+	private $cron_name_batching = 'wpdash_child_cron_theme_health_check_batching';
 
 	/**
 	 * Transient: Theme timestamps.
 	 *
 	 * @var string
 	 */
-	private $tran_name_theme_timestamps = 'mainwp_child_tran_name_theme_timestamps';
+	private $tran_name_theme_timestamps = 'wpdash_child_tran_name_theme_timestamps';
 
 	/**
 	 * Transient: Themes to batch.
 	 *
 	 * @var string
 	 */
-	private $tran_name_themes_to_batch = 'mainwp_child_tran_name_themes_to_batch';
+	private $tran_name_themes_to_batch = 'wpdash_child_tran_name_themes_to_batch';
 
 	/**
 	 * Transient: Theme last daily run.
 	 *
 	 * @var string
 	 */
-	private $option_name_last_daily_run = 'mainwp_child_theme_last_daily_run';
+	private $option_name_last_daily_run = 'wpdash_child_theme_last_daily_run';
 
 	/**
 	 * Public static variable to hold the single instance of the class.

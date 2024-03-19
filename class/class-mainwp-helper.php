@@ -121,12 +121,12 @@ class MainWP_Helper {
 		global $wp_filesystem;
 
 		$upload_dir = wp_upload_dir();
-		$dir        = $upload_dir['basedir'] . DIRECTORY_SEPARATOR . 'mainwp' . DIRECTORY_SEPARATOR;
+		$dir        = $upload_dir['basedir'] . DIRECTORY_SEPARATOR . 'wpdash' . DIRECTORY_SEPARATOR;
 		self::check_dir( $dir, $die_on_error );
 		if ( ! $wp_filesystem->exists( $dir . 'index.php' ) ) {
 			touch( $dir . 'index.php' );
 		}
-		$url = $upload_dir['baseurl'] . '/mainwp/';
+		$url = $upload_dir['baseurl'] . '/wpdash/';
 
 		if ( 'backup' === $what ) {
 			$dir .= 'backup' . DIRECTORY_SEPARATOR;
