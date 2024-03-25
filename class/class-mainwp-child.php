@@ -436,12 +436,12 @@ class MainWP_Child
         $to_delete = [
             'mainwp_child_uniqueId',
             'mainwp_child_pubkey',
+            'mainwp_child_sshkey',
+            'mainwp_child_sshtime',
             'mainwp_child_nonce',
             'mainwp_security',
             'mainwp_child_server',
             'mainwp_child_connected_admin',
-            'mainwp_child_repository_url',
-            'mainwp_child_repository_branch',
         ];
         $to_delete[] = 'mainwp_ext_snippets_enabled';
         $to_delete[] = 'mainwp_ext_code_snippets';
@@ -475,6 +475,8 @@ class MainWP_Child
 
         $to_delete = [
             'mainwp_child_pubkey',
+            'mainwp_child_sshkey',
+            'mainwp_child_sshtime',
             'mainwp_child_nonce',
             'mainwp_child_connected_admin',
             'mainwp_child_openssl_sign_algo',
