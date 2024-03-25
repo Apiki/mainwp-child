@@ -474,7 +474,7 @@ class MainWP_Backup {
 	public function backup_full( $fileName ) { //phpcs:ignore -- complex method.
 		// phpcs:disable WordPress.Security.NonceVerification
 		$excludes   = ( isset( $_POST['exclude'] ) ? explode( ',', wp_unslash( $_POST['exclude'] ) ) : array() ); //phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- ok.
-		$excludes[] = str_replace( ABSPATH, '', WP_CONTENT_DIR ) . '/uploads/mainwp';
+		$excludes[] = str_replace( ABSPATH, '', WP_CONTENT_DIR ) . '/uploads/wpdash';
 		$uploadDir  = MainWP_Helper::get_mainwp_dir();
 		$uploadDir  = $uploadDir[0];
 		$excludes[] = str_replace( ABSPATH, '', $uploadDir );

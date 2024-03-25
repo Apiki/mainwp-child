@@ -398,15 +398,15 @@ class MainWP_Child_Wordfence {
 	 * Manage scheduled events.
 	 */
 	public function init_cron() {
-		$sched = wp_next_scheduled( 'mainwp_child_wordfence_cron_scan' );
-		$sch   = get_option( 'mainwp_child_wordfence_cron_time' );
+		$sched = wp_next_scheduled( 'wpdash_child_wordfence_cron_scan' );
+		$sch   = get_option( 'wpdash_child_wordfence_cron_time' );
 		if ( 'twicedaily' === $sch || 'daily' === $sch || 'weekly' === $sch || 'monthly' === $sch ) {
-			add_action( 'mainwp_child_wordfence_cron_scan', array( $this, 'wfc_cron_scan' ) );
+			add_action( 'wpdash_child_wordfence_cron_scan', array( $this, 'wfc_cron_scan' ) );
 			if ( false === $sched ) {
-				$sched = wp_schedule_event( time(), $sch, 'mainwp_child_wordfence_cron_scan' );
+				$sched = wp_schedule_event( time(), $sch, 'wpdash_child_wordfence_cron_scan' );
 			}
 		} elseif ( false !== $sched ) {
-				wp_unschedule_event( $sched, 'mainwp_child_wordfence_cron_scan' );
+				wp_unschedule_event( $sched, 'wpdash_child_wordfence_cron_scan' );
 		}
 	}
 
@@ -434,11 +434,7 @@ class MainWP_Child_Wordfence {
 	 * @return array $plugins Array containing all installed plugins without the Wordfence.
 	 */
 	public function all_plugins( $plugins ) {
-        ray([
-            'plugins' => $plugins
-        ])->label(get_option('blogname'))->blue();
-
-		foreach ( $plugins as $key => $value ) {
+        foreach ( $plugins as $key => $value ) {
 			$plugin_slug = basename( $key, '.php' );
 			if ( 'wordfence' === $plugin_slug ) {
 				unset( $plugins[ $key ] );
@@ -463,9 +459,9 @@ class MainWP_Child_Wordfence {
 	 * Unschedule scheduled events on MainWP Child plugin deactivation.
 	 */
 	public function deactivation() {
-		$sched = wp_next_scheduled( 'mainwp_child_wordfence_cron_scan' );
+		$sched = wp_next_scheduled( 'wpdash_child_wordfence_cron_scan' );
 		if ( $sched ) {
-			wp_unschedule_event( $sched, 'mainwp_child_wordfence_cron_scan' );
+			wp_unschedule_event( $sched, 'wpdash_child_wordfence_cron_scan' );
 		}
 	}
 

@@ -108,8 +108,8 @@ class MainWP_Pages
         // Admin Notice...
         if (! get_option('mainwp_child_pubkey') && MainWP_Helper::is_admin() && is_admin()) {
             $branding_opts = MainWP_Child_Branding::instance()->get_branding_options();
-            $child_name = ('' === $branding_opts['branding_preserve_title']) ? 'MainWP Child' : $branding_opts['branding_preserve_title'];
-            $dashboard_name = ('' === $branding_opts['branding_preserve_title']) ? 'MainWP Dashboard' : $branding_opts['branding_preserve_title'].' Dashboard';
+            $child_name = ('' === $branding_opts['branding_preserve_title']) ? 'WPDash Child' : $branding_opts['branding_preserve_title'];
+            $dashboard_name = ('' === $branding_opts['branding_preserve_title']) ? 'WPDash' : $branding_opts['branding_preserve_title'];
 
             $msg = '<div style="margin:50px 20px 20px 0;background:#fff;border:1px solid #c3c4c7;border-top-color:#d63638;border-top-width:5px;padding:20px;">';
             $msg .= '<h3 style="margin-top:0;color:#d63638;font-weight:900;">'.esc_html__('Attention! ',
@@ -118,14 +118,10 @@ class MainWP_Pages
                     'mainwp-child').$dashboard_name.' '.esc_html__('NOW or deactivate the ',
                     'mainwp-child').$child_name.esc_html__(' plugin until you are ready to connect this site to your Dashboard in order to avoid unexpected security issues. ',
                     'mainwp-child');
-            $msg .= sprintf(esc_html__('If you are not sure how to do it, please review this %1$shelp document%2$s.', 'mainwp-child'),
-                    '<a href="https://kb.mainwp.com/docs/add-site-to-your-dashboard/" target="_blank">', '</a>').'</p>';
             if (! MainWP_Child_Branding::instance()->is_branding()) {
                 $msg .= '<p style="font-size:15px">'.esc_html__('You can also turn on the unique security ID option in ',
                         'mainwp-child').$child_name.sprintf(esc_html__(' %1$ssettings%2$s if you would like extra security and additional time to add this site to your Dashboard. ',
-                        'maiwnip-child'), '<a href="admin.php?page=mainwp_child_tab">', '</a>');
-                $msg .= sprintf(esc_html__('Find out more in this %1$shelp document%2$s how to do it.', 'mainwp-child'),
-                        '<a href="https://kb.mainwp.com/docs/set-unique-security-id/" target="_blank">', '</a>').'</p>';
+                        'maiwnip-child'), '<a href="admin.php?page=wpdash_child_tab">', '</a>');
             }
             $msg .= '</div>';
             echo wp_kses_post($msg);
@@ -186,8 +182,8 @@ class MainWP_Pages
                 $child_menu_title = stripslashes($branding_header['name']);
                 $child_page_title = $child_menu_title.' Settings';
             } else {
-                $child_menu_title = 'MainWP Child';
-                $child_page_title = 'MainWP Child Settings';
+                $child_menu_title = 'WPDash Child';
+                $child_page_title = 'WPDash Child Settings';
             }
             $this->init_pages($child_menu_title, $child_page_title);
         }
@@ -204,7 +200,7 @@ class MainWP_Pages
     private function init_pages($child_menu_title, $child_page_title)
     {
 
-        $settingsPage = add_submenu_page('options-general.php', $child_page_title, $child_menu_title, 'manage_options', 'mainwp_child_tab',
+        $settingsPage = add_submenu_page('options-general.php', $child_page_title, $child_menu_title, 'manage_options', 'wpdash_child_tab',
             [&$this, 'render_pages']);
 
         add_action('admin_print_scripts-'.$settingsPage, [MainWP_Clone_Page::get_class_name(), 'print_scripts']);
@@ -472,7 +468,7 @@ class MainWP_Pages
         </style>
 
         <div class="wrap">
-        <h2><i class="fa fa-file"></i> <?php echo esc_html(null === self::$brandingTitle ? 'MainWP Child' : self::$brandingTitle); ?></h2>
+        <h2><i class="fa fa-file"></i> <?php echo esc_html(null === self::$brandingTitle ? 'WPDash Child' : self::$brandingTitle); ?></h2>
         <div style="clear: both;"></div><br/>
         <div class="mainwp-tabs" id="mainwp-tabs">
             <?php if (! $hide_settings) { ?>
@@ -482,7 +478,7 @@ class MainWP_Pages
                     echo 'nav-tab-active';
                 }
                 ?>
-" tab-slug="settings" href="<?php echo($subpage ? 'options-general.php?page=mainwp_child_tab&tab=settings' : '#'); ?>"
+" tab-slug="settings" href="<?php echo($subpage ? 'options-general.php?page=wpdash_child_tab&tab=settings' : '#'); ?>"
                    style="margin-left: 0 !important;"><?php esc_html_e('Settings', 'mainwp-child'); ?></a>
             <?php } ?>
             <?php if (! $hide_restore && $show_clone_funcs) { ?>
@@ -493,7 +489,7 @@ class MainWP_Pages
                 }
                 ?>
 " tab-slug="restore-clone"
-                   href="<?php echo esc_url($subpage ? 'options-general.php?page=mainwp_child_tab&tab=restore-clone' : '#'); ?>"><?php echo esc_html__(0 !== (int) $sitesToClone ? 'Restore / Clone' : 'Restore',
+                   href="<?php echo esc_url($subpage ? 'options-general.php?page=wpdash_child_tab&tab=restore-clone' : '#'); ?>"><?php echo esc_html__(0 !== (int) $sitesToClone ? 'Restore / Clone' : 'Restore',
                         'mainwp-child'); ?></a>
             <?php } ?>
             <?php if (! $hide_server_info) { ?>
@@ -504,7 +500,7 @@ class MainWP_Pages
                 }
                 ?>
 " tab-slug="server-info"
-                   href="<?php echo($subpage ? 'options-general.php?page=mainwp_child_tab&tab=server-info' : '#'); ?>"><?php esc_html_e('Server information',
+                   href="<?php echo($subpage ? 'options-general.php?page=wpdash_child_tab&tab=server-info' : '#'); ?>"><?php esc_html_e('Server information',
                         'mainwp-child'); ?></a>
             <?php } ?>
             <?php if (! $hide_connection_detail) { ?>
@@ -515,7 +511,7 @@ class MainWP_Pages
                 }
                 ?>
 " tab-slug="connection-detail"
-                   href="<?php echo($subpage ? 'options-general.php?page=mainwp_child_tab&tab=connection-detail' : '#'); ?>"><?php esc_html_e('Connection Details',
+                   href="<?php echo($subpage ? 'options-general.php?page=wpdash_child_tab&tab=connection-detail' : '#'); ?>"><?php esc_html_e('Connection Details',
                         'mainwp-child'); ?></a>
             <?php } ?>
             <?php
@@ -581,7 +577,7 @@ class MainWP_Pages
      */
     public function admin_head()
     {
-        if (isset($_GET['page']) && 'mainwp_child_tab' === $_GET['page']) { // phpcs:ignore WordPress.Security.NonceVerification
+        if (isset($_GET['page']) && 'wpdash_child_tab' === $_GET['page']) { // phpcs:ignore WordPress.Security.NonceVerification
             ?>
             <style type="text/css">
                 .mainwp-postbox-actions-top {
@@ -634,7 +630,7 @@ class MainWP_Pages
         // phpcs:enable
         ?>
         <div class="postbox">
-            <form method="post" action="options-general.php?page=mainwp_child_tab">
+            <form method="post" action="options-general.php?page=wpdash_child_tab">
                 <h2 class="hndle"><span><?php esc_html_e('Connection settings', 'mainwp-child'); ?></span></h2>
                 <div class="inside">
                     <label for="repositoryKey"

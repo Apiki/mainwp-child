@@ -29,42 +29,42 @@ class MainWP_Child_Plugins_Check {
 	 *
 	 * @var string
 	 */
-	private $cron_name_watcher = 'mainwp_child_cron_plugin_health_check_watcher';
+	private $cron_name_watcher = 'wpdash_child_cron_plugin_health_check_watcher';
 
 	/**
 	 * Cron: Plugin health check daily.
 	 *
 	 * @var string
 	 */
-	private $cron_name_daily = 'mainwp_child_cron_plugin_health_check_daily';
+	private $cron_name_daily = 'wpdash_child_cron_plugin_health_check_daily';
 
 	/**
 	 * Cron: Plugin health check batching.
 	 *
 	 * @var string
 	 */
-	private $cron_name_batching = 'mainwp_child_cron_plugin_health_check_batching';
+	private $cron_name_batching = 'wpdash_child_cron_plugin_health_check_batching';
 
 	/**
 	 * Transient: Plugin timestamps.
 	 *
 	 * @var string
 	 */
-	private $tran_name_plugin_timestamps = 'mainwp_child_tran_name_plugin_timestamps';
+	private $tran_name_plugin_timestamps = 'wpdash_child_tran_name_plugin_timestamps';
 
 	/**
 	 * Transient: Plugins to batch.
 	 *
 	 * @var string
 	 */
-	private $tran_name_plugins_to_batch = 'mainwp_child_tran_name_plugins_to_batch';
+	private $tran_name_plugins_to_batch = 'wpdash_child_tran_name_plugins_to_batch';
 
 	/**
 	 * Transient: Plugin last daily run.
 	 *
 	 * @var string
 	 */
-	private $option_name_last_daily_run = 'mainwp_child_plugin_last_daily_run';
+	private $option_name_last_daily_run = 'wpdash_child_plugin_last_daily_run';
 
 	/**
 	 * Public static variable to hold the single instance of the class.
@@ -165,7 +165,7 @@ class MainWP_Child_Plugins_Check {
 		if ( ! wp_next_scheduled( $this->cron_name_batching ) ) {
 			$last_run = get_option( $this->option_name_last_daily_run );
 
-			if ( false === $last_run || ! is_integer( $last_run ) ) {
+			if ( false === $last_run || ! is_int( $last_run ) ) {
 				$last_run = false;
 			} else {
 				$last_run = new \DateTime( '@' . $last_run );

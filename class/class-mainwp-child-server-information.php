@@ -88,7 +88,7 @@ class MainWP_Child_Server_Information extends MainWP_Child_Server_Information_Ba
 	 */
 	public static function render_warnings() {
 		$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
-		if ( isset( $_SERVER['REQUEST_URI'] ) && ( stristr( $request_uri, 'mainwp_child_tab' ) || stristr( $request_uri, 'mainwp-reports-page' ) || stristr( $request_uri, 'mainwp-reports-settings' ) ) ) {
+		if ( isset( $_SERVER['REQUEST_URI'] ) && ( stristr( $request_uri, 'wpdash_child_tab' ) || stristr( $request_uri, 'mainwp-reports-page' ) || stristr( $request_uri, 'mainwp-reports-settings' ) ) ) {
 			return;
 		}
 
@@ -184,7 +184,7 @@ class MainWP_Child_Server_Information extends MainWP_Child_Server_Information_Ba
 				<?php
 				$warning = '';
 				if ( $warnings > 0 ) {
-					$warning .= '<tr><td colspan="2">This site may not connect to your dashboard or may have other issues. Check your <a href="options-general.php?page=mainwp_child_tab">MainWP server information page</a>.</td><td style="text-align: right;"><a href="#" id="mainwp-child-connect-warning-dismiss">Dismiss</a></td></tr>';
+					$warning .= '<tr><td colspan="2">This site may not connect to your dashboard or may have other issues. Check your <a href="options-general.php?page=wpdash_child_tab">MainWP server information page</a>.</td><td style="text-align: right;"><a href="#" id="mainwp-child-connect-warning-dismiss">Dismiss</a></td></tr>';
 				}
 				echo $warning; // phpcs:ignore WordPress.Security.EscapeOutput
 				?>
@@ -203,7 +203,7 @@ class MainWP_Child_Server_Information extends MainWP_Child_Server_Information_Ba
 	 */
 	public static function is_mainwp_pages() {
 		$screen = get_current_screen();
-		if ( $screen && strpos( $screen->base, 'mainwp_' ) !== false && strpos( $screen->base, 'mainwp_child_tab' ) === false ) {
+		if ( $screen && strpos( $screen->base, 'wpdash_' ) !== false && strpos( $screen->base, 'wpdash_child_tab' ) === false ) {
 			return true;
 		}
 
@@ -578,7 +578,7 @@ class MainWP_Child_Server_Information extends MainWP_Child_Server_Information_Ba
 	private static function render_server_infor() {
 		$branding_title = MainWP_Child_Branding::instance()->get_branding_title();
 		if ( '' === $branding_title ) {
-			$branding_title = 'MainWP Child';
+			$branding_title = 'WPDash Child';
 		}
 		?>
 		<table id="mainwp-table" class="wp-list-table widefat" cellspacing="0">
@@ -627,12 +627,12 @@ class MainWP_Child_Server_Information extends MainWP_Child_Server_Information_Ba
 		</tr>
 		<tr>
 			<td></td>
-			<td><?php echo esc_html( stripslashes( $branding_title ) ) . ' ' . esc_html__( 'Version', 'mainwp-chil' ); ?></td>
+			<td><?php echo esc_html( stripslashes( $branding_title ) ) . ' ' . esc_html__( 'Version', 'mainwp-child' ); ?></td>
 			<td><?php echo esc_html( self::get_mainwp_version() ); ?></td>
 			<td><?php echo esc_html( self::get_current_version() ); ?></td>
 			<td><?php echo esc_html( self::render_mainwp_version_check() ); ?></td>
 		</tr>
-		<?php self::render_mainwp_directory(); ?>	
+		<?php self::render_mainwp_directory(); ?>
 		<tr>
 			<td style="background: #333; color: #fff;" colspan="5"><?php esc_html_e( 'WordPress', 'mainwp-child' ); ?></td>
 		</tr>
@@ -1090,7 +1090,7 @@ class MainWP_Child_Server_Information extends MainWP_Child_Server_Information_Ba
 	protected static function render_mainwp_directory() {
 		$branding_title = MainWP_Child_Branding::instance()->get_branding_title();
 		if ( '' === $branding_title ) {
-			$branding_title = 'MainWP';
+			$branding_title = 'WPDash';
 		}
 		$branding_title .= ' Upload Directory';
 
@@ -1281,7 +1281,7 @@ class MainWP_Child_Server_Information extends MainWP_Child_Server_Information_Ba
 		if ( empty( $lines ) ) {
 			$branding_title = MainWP_Child_Branding::instance()->get_branding_title();
 			if ( '' === $branding_title ) {
-				$branding_title = 'MainWP';
+				$branding_title = 'WPDash';
 			}
 			$msg = stripslashes( $branding_title ) . ' is unable to find your error logs, please contact your host for server error logs.';
 			?>
@@ -1393,7 +1393,7 @@ class MainWP_Child_Server_Information extends MainWP_Child_Server_Information_Ba
 	public static function render_connection_details() {
 		$branding_title = MainWP_Child_Branding::instance()->get_branding_title();
 		if ( '' === $branding_title ) {
-			$branding_title = 'MainWP';
+			$branding_title = 'WPDash';
 		}
 
 		/**
@@ -1423,7 +1423,7 @@ class MainWP_Child_Server_Information extends MainWP_Child_Server_Information_Ba
 			'uniqueid'      => array(
 				'title' => esc_html__( 'Child unique security id', 'mainwp-child' ),
 				'value' => ! empty( $uniqueId ) ? $uniqueId : esc_html__( 'Leave the field blank', 'mainwp-child' ),
-				'desc'  => sprintf( esc_html__( 'Child unique security id is not required, however, since you have enabled it, you need to add it to your %s dashboard.', 'mainwp-child' ), stripslashes( $branding_title ) ),
+				'desc'  => sprintf( esc_html__( 'Child unique security id is not required, however, since you have enabled it, you need to add it to your %s.', 'mainwp-child' ), stripslashes( $branding_title ) ),
 			),
 			'verify_ssl'    => array(
 				'title' => esc_html__( 'Verify certificate', 'mainwp-child' ),

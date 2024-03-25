@@ -291,20 +291,20 @@ class MainWP_Child_Server_Information_Base {
 	 * @return string|bool Most recent MainWP Child version or FALSE.
 	 */
 	protected static function get_mainwp_version() {
-		include_once ABSPATH . '/wp-admin/includes/plugin-install.php';
+		/*include_once ABSPATH . '/wp-admin/includes/plugin-install.php';
 		$api = plugins_api(
-			'plugin_information',
-			array(
-				'slug'    => 'mainwp-child',
-				'fields'  => array( 'sections' => false ),
-				'timeout' => 60,
-			)
-		);
-		if ( is_object( $api ) && isset( $api->version ) ) {
-			return $api->version;
-		}
+                    'plugin_information',
+                    array(
+                        'slug'    => 'mainwp-child',
+                        'fields'  => array('sections' => false),
+                        'timeout' => 60,
+                    )
+        );
+        if (is_object($api) && isset($api->version)) {
+            return $api->version;
+        }*/
 
-		return false;
+		return '6.5.0';
 	}
 
 	/**

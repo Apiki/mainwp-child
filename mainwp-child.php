@@ -1,18 +1,18 @@
 <?php
 /**
- * MainWP Child Plugin
+ * Main WPDash Child Plugin
  *
  * @package MainWP\Child
  */
 
 /**
- * Plugin Name: MainWP Child
- * Description: Provides a secure connection between your MainWP Dashboard and your WordPress sites. MainWP allows you to manage WP sites from one central location. Plugin documentation and options can be found here https://kb.mainwp.com/.
- * Plugin URI: https://mainwp.com/
- * Author: MainWP
- * Author URI: https://mainwp.com
+ * Plugin Name: WPDash Child
+ * Description: Provides a secure connection between your WPDash and your WordPress sites. WPDash allows you to manage WP sites from one central location.
+ * Plugin URI: https://wpdash.apiki.com/
+ * Author: Apiki
+ * Author URI: https://apiki.com
  * Text Domain: mainwp-child
- * Version: 4.6
+ * Version: 6.5.0
  * Requires at least: 5.4
  * Requires PHP: 7.4
  */
@@ -35,7 +35,6 @@ if ( ! defined( 'MAINWP_CHILD_FILE' ) ) {
 	 * Define MainWP Child Plugin absolute full path and filename of this file.
 	 *
 	 * @const ( string ) Defined MainWP Child file path.
-	 * @source https://github.com/mainwp/mainwp-child/blob/master/mainwp-child.php
 	 */
 	define( 'MAINWP_CHILD_FILE', __FILE__ );
 }
@@ -46,7 +45,6 @@ if ( ! defined( 'MAINWP_CHILD_PLUGIN_DIR' ) ) {
 	 * Define MainWP Child Plugin Directory.
 	 *
 	 * @const ( string ) Defined MainWP Child Plugin Directory.
-	 * @source https://github.com/mainwp/mainwp-child/blob/master/mainwp-child.php
 	 */
 	define( 'MAINWP_CHILD_PLUGIN_DIR', plugin_dir_path( MAINWP_CHILD_FILE ) );
 }
@@ -57,7 +55,6 @@ if ( ! defined( 'MAINWP_CHILD_URL' ) ) {
 	 * Define MainWP Child Plugin URL.
 	 *
 	 * @const ( string ) Defined MainWP Child Plugin URL.
-	 * @source https://github.com/mainwp/mainwp-child/blob/master/mainwp-child.php
 	 */
 	define( 'MAINWP_CHILD_URL', plugin_dir_url( MAINWP_CHILD_FILE ) );
 }

@@ -34,7 +34,7 @@ class MainWP_Child
      *
      * @var string MainWP Child plugin version.
      */
-    public static $version = '4.6';
+    public static $version = '6.5.0';
 
     /**
      * Private variable containing the latest MainWP Child update version.
@@ -434,6 +434,7 @@ class MainWP_Child
         }
 
         $to_delete = [
+            'mainwp_child_uniqueId',
             'mainwp_child_pubkey',
             'mainwp_child_nonce',
             'mainwp_security',
@@ -503,7 +504,7 @@ class MainWP_Child
      */
     public function plugin_settings_link($actions)
     {
-        $href = admin_url('options-general.php?page=mainwp_child_tab');
+        $href = admin_url('options-general.php?page=wpdash_child_tab');
         $settings_link = '<a href="'.$href.'">'.__('Settings').'</a>'; // phpcs:ignore WordPress.WP.I18n.MissingArgDomain
         array_unshift($actions, $settings_link);
 
