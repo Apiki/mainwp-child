@@ -7,7 +7,7 @@
 
 /**
  * Plugin Name: WPDash Child
- * Description: Provides a secure connection between your WPDash and your WordPress sites. WPDash allows you to manage WP sites from one central location.
+ * Description: Integração segura com o WP Dash - A plataforma de gestão de sites WordPress da Apiki
  * Plugin URI: https://wpdash.apiki.com/
  * Author: Apiki
  * Author URI: https://apiki.com
