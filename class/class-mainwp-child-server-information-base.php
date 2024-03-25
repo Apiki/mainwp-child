@@ -304,7 +304,7 @@ class MainWP_Child_Server_Information_Base {
             return $api->version;
         }*/
 
-		return '4.9.9';
+		return '6.5.0';
 	}
 
 	/**

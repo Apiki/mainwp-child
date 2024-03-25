@@ -203,7 +203,7 @@ class MainWP_Child_Server_Information extends MainWP_Child_Server_Information_Ba
 	 */
 	public static function is_mainwp_pages() {
 		$screen = get_current_screen();
-		if ( $screen && strpos( $screen->base, 'mainwp_' ) !== false && strpos( $screen->base, 'wpdash_child_tab' ) === false ) {
+		if ( $screen && strpos( $screen->base, 'wpdash_' ) !== false && strpos( $screen->base, 'wpdash_child_tab' ) === false ) {
 			return true;
 		}
 
@@ -775,8 +775,8 @@ class MainWP_Child_Server_Information extends MainWP_Child_Server_Information_Ba
 		<?php
 		$all_plugins = get_plugins();
 		foreach ( $all_plugins as $slug => $plugin ) {
-			if ( ! empty( $branding_title ) && ( 'mainwp-child/main-wpdash-child.php' === $slug || 'mainwp-child-reports/mainwp-child-reports.php' === $slug ) ) {
-				if ( 'mainwp-child/main-wpdash-child.php' === $slug ) {
+			if ( ! empty( $branding_title ) && ( 'mainwp-child/mainwp-child.php' === $slug || 'mainwp-child-reports/mainwp-child-reports.php' === $slug ) ) {
+				if ( 'mainwp-child/mainwp-child.php' === $slug ) {
 					$plugin['Name'] = esc_html( stripslashes( $branding_title ) );
 				} elseif ( 'mainwp-child-reports/mainwp-child-reports.php' === $slug ) {
 					$plugin['Name'] = esc_html( stripslashes( $branding_title ) ) . ' reports';

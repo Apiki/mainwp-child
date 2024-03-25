@@ -1346,7 +1346,7 @@ class MainWP_Child_Branding {
 	 * @return array $slugs Updated array of slugs of all installed plugins.
 	 */
 	public function hide_update_notice( $slugs ) {
-		$slugs[] = 'mainwp-child/main-wpdash-child.php';
+		$slugs[] = 'mainwp-child/mainwp-child.php';
 		return $slugs;
 	}
 
@@ -1370,8 +1370,8 @@ class MainWP_Child_Branding {
 			return $value;
 		}
 
-		if ( isset( $value->response['mainwp-child/main-wpdash-child.php'] ) ) {
-			unset( $value->response['mainwp-child/main-wpdash-child.php'] );
+		if ( isset( $value->response['mainwp-child/mainwp-child.php'] ) ) {
+			unset( $value->response['mainwp-child/mainwp-child.php'] );
 		}
 		return $value;
 	}
