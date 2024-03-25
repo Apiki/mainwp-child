@@ -30,6 +30,6 @@ node_modules
 !/languages
 !/libs
 !index.html
-!main-wpdash-child.php
+!mainwp-child.php
 !privacy-policy.txt
 !readme.txt
