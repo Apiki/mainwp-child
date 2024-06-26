@@ -14,50 +14,50 @@ namespace MainWP\Child;
  */
 class MainWP_Child_Format {
 
-	/**
-	 * Public static variable to hold the single instance of the class.
-	 *
-	 * @var mixed Default null
-	 */
-	public static $instance = null;
+    /**
+     * Public static variable to hold the single instance of the class.
+     *
+     * @var mixed Default null
+     */
+    public static $instance = null;
 
-	/**
-	 * Method get_class_name()
-	 *
-	 * Get class name.
-	 *
-	 * @return string __CLASS__ Class name.
-	 */
-	public static function get_class_name() {
-		return __CLASS__;
-	}
+    /**
+     * Method get_class_name()
+     *
+     * Get class name.
+     *
+     * @return string __CLASS__ Class name.
+     */
+    public static function get_class_name() {
+        return __CLASS__;
+    }
 
-	/**
-	 * Method instance()
-	 *
-	 * Create a public static instance.
-	 *
-	 * @return mixed Class instance.
-	 */
-	public static function instance() {
-		if ( null === self::$instance ) {
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
+    /**
+     * Method instance()
+     *
+     * Create a public static instance.
+     *
+     * @return mixed Class instance.
+     */
+    public static function instance() {
+        if ( null === static::$instance ) {
+            static::$instance = new self();
+        }
+        return static::$instance;
+    }
 
 
-	/**
-	 * Method format_email()
-	 *
-	 * Format emails.
-	 *
-	 * @param string $body Contains the email content.
-	 *
-	 * @return string Return formatted email.
-	 */
-	public static function format_email( $body ) {
-		return '<br>
+    /**
+     * Method format_email()
+     *
+     * Format emails.
+     *
+     * @param string $body Contains the email content.
+     *
+     * @return string Return formatted email.
+     */
+    public static function format_email( $body ) {
+        return '<br>
 <div>
             <br>
             <div style="background:#ffffff;padding:0 1.618em;font:13px/20px Helvetica,Arial,Sans-serif;padding-bottom:50px!important">
@@ -80,21 +80,21 @@ class MainWP_Child_Format {
 
                     <div style="display: block; width: 100% ; background: #1c1d1b;">
                       <div style="display: block; width: 95% ; margin-left: auto ; margin-right: auto ; padding: .5em 0 ;">
-                        <div style="padding: .5em 0 ; float: left;"><p style="color: #fff; font-family: Helvetica, Sans; font-size: 12px ;">© 2013 MainWP. All Rights Reserved.</p></div>
+                        <div style="padding: .5em 0 ; float: left;"><p style="color: #fff; font-family: Helvetica, Sans; font-size: 12px ;">© 2023 WPDash. All Rights Reserved.</p></div>
                       </div>
                    </div>
                 </div>
                 <center>
                     <br><br><br><br><br><br>
-                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color:#ffffff;border-top:1px solid #e5e5e5">
+                    <table style="border:0;padding:0;border-spacing:0;width:100%;background-color:#ffffff;border-top:1px solid #e5e5e5">
                         <tbody><tr>
                             <td align="center" valign="top" style="padding-top:20px;padding-bottom:20px">
-                                <table border="0" cellpadding="0" cellspacing="0">
+                                <table style="border:0;padding:0;border-spacing:0;">
                                     <tbody><tr>
                                         <td align="center" valign="top" style="color:#606060;font-family:Helvetica,Arial,sans-serif;font-size:11px;line-height:150%;padding-right:20px;padding-bottom:5px;padding-left:20px;text-align:center">
-                                            This email is sent from your MainWP Dashboard.
+                                            This email is sent from your WPDash.
                                             <br>
-                                            If you do not wish to receive these notices please re-check your preferences in the MainWP Settings page.
+                                            If you do not wish to receive these notices please re-check your preferences in the WPDash Settings page.
                                             <br>
                                             <br>
                                         </td>
@@ -108,5 +108,5 @@ class MainWP_Child_Format {
             </div>
 </div>
 <br>';
-	}
+    }
 }
