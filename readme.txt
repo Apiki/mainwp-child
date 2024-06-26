@@ -5,7 +5,7 @@ Author: Apiki
 Author URI: https://wpdash.apiki.com
 Plugin URI: https://wpdash.apiki.com
 Requires at least: 6.2
-Tested up to: 6.4.2
+Tested up to: 6.5.3
 Requires PHP: 7.4
 Stable tag: 6.1
 License: GPLv3 or later
