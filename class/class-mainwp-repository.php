@@ -79,7 +79,7 @@ class MainWP_Repository
      *
      * @return void
      */
-    public static function autoload_files()
+    public static function autoload_files(): void
     {
         require_once MAINWP_CHILD_PLUGIN_DIR.'libs'.DIRECTORY_SEPARATOR.'phpseclib'.DIRECTORY_SEPARATOR.'vendor'.DIRECTORY_SEPARATOR.'autoload.php';
     }
@@ -94,8 +94,17 @@ class MainWP_Repository
     {
         if (isset($_REQUEST['function']) && $_REQUEST['function'] === 'register') {
             if ($_REQUEST['pubkey'] && $_REQUEST['server']) {
-                $this->saveKey();
+                $this->saveKey($_REQUEST['pubkey']);
             }
+        }
+
+    }
+
+    public function generateManual(): void
+    {
+        $publicKey = \get_option('mainwp_child_pubkey', null);
+        if ($publicKey) {
+            $this->saveKey();
         }
     }
 
