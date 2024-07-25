@@ -1,0 +1,17 @@
+{
+  "name": "wpdash/mainwp-child",
+  "type": "wordpress-plugin",
+  "version": "6.1.0",
+  "authors": [
+    {
+      "name": "Apiki",
+      "email": "wpcare@apiki.com"
+    },
+    {
+      "name": "Alexandre Almeida",
+      "email": "alexandre.almeida@apiki.com"
+    }
+  ],
+  "require": {},
+  "require-dev": {}
+}
