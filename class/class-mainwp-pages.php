@@ -14,8 +14,7 @@ namespace MainWP\Child;
  *
  * Manage the MainWP Child plugin pages.
  */
-class MainWP_Pages
-{
+class MainWP_Pages {
 
     /**
      * Public static variable to hold the single instance of the class.
@@ -52,8 +51,7 @@ class MainWP_Pages
      *
      * @return string __CLASS__ Class name.
      */
-    public static function get_class_name()
-    {
+    public static function get_class_name() {
         return __CLASS__;
     }
 
@@ -62,8 +60,7 @@ class MainWP_Pages
      *
      * Run any time class is called.
      */
-    public function __construct()
-    {
+    public function __construct() {
     }
 
     /**
@@ -73,9 +70,8 @@ class MainWP_Pages
      *
      * @return mixed Class instance.
      */
-    public static function get_instance()
-    {
-        if (null === static::$instance) {
+    public static function get_instance() {
+        if ( null === static::$instance ) {
             static::$instance = new self();
         }
 
@@ -85,12 +81,11 @@ class MainWP_Pages
     /**
      * Initiate actions and filters.
      */
-    public function init()
-    {
-        add_action('admin_menu', [&$this, 'admin_menu']);
-        add_action('admin_head', [&$this, 'admin_head']);
-        add_action('admin_notices', [&$this, 'admin_notice']);
-        add_filter('plugin_row_meta', [&$this, 'plugin_row_meta'], 10, 2);
+    public function init() {
+        add_action( 'admin_menu', array( &$this, 'admin_menu' ) );
+        add_action( 'admin_head', array( &$this, 'admin_head' ) );
+        add_action( 'admin_notices', array( &$this, 'admin_notice' ) );
+        add_filter( 'plugin_row_meta', array( &$this, 'plugin_row_meta' ), 10, 2 );
     }
 
 
@@ -101,10 +96,8 @@ class MainWP_Pages
      *
      * @uses \MainWP\Child\MainWP_Child_Branding::get_branding_options()
      * @uses \MainWP\Child\MainWP_Child_Branding::is_branding()
-     * @uses \MainWP\Child\MainWP_Child_Server_Information::render_warnings()
      */
-    public function admin_notice()
-    {
+    public function admin_notice() {
         // Admin Notice...
         if (! get_option('mainwp_child_pubkey') && MainWP_Helper::is_admin() && is_admin()) {
             $branding_opts = MainWP_Child_Branding::instance()->get_branding_options();
@@ -124,9 +117,8 @@ class MainWP_Pages
                         'maiwnip-child'), '<a href="admin.php?page=wpdash_child_tab">', '</a>');
             }
             $msg .= '</div>';
-            echo wp_kses_post($msg);
+            echo wp_kses_post( $msg );
         }
-        MainWP_Child_Server_Information::render_warnings();
     }
 
     /**
@@ -134,111 +126,107 @@ class MainWP_Pages
      *
      * @uses \MainWP\Child\MainWP_Child_Branding::get_branding_options()
      */
-    public function admin_menu()
-    { //phpcs:ignore -- NOSONAR - complex method.
-        $branding_opts = MainWP_Child_Branding::instance()->get_branding_options();
-        $is_hide = isset($branding_opts['hide']) ? $branding_opts['hide'] : '';
+    public function admin_menu() { //phpcs:ignore -- NOSONAR - complex method.
+        $branding_opts      = MainWP_Child_Branding::instance()->get_branding_options();
+        $is_hide            = isset( $branding_opts['hide'] ) ? $branding_opts['hide'] : '';
         $cancelled_branding = $branding_opts['cancelled_branding'];
-        $uri = isset($_SERVER['REQUEST_URI']) ? esc_url_raw(wp_unslash($_SERVER['REQUEST_URI'])) : '';
-        if (isset($branding_opts['remove_wp_tools']) && $branding_opts['remove_wp_tools'] && ! $cancelled_branding) {
-            remove_menu_page('tools.php');
-            $pos = $uri ? stripos($uri, 'tools.php') || stripos($uri, 'import.php') || stripos($uri, 'export.php') : false;
-            if (false !== $pos) {
-                wp_safe_redirect(get_option('siteurl').'/wp-admin/index.php');
+        $uri                = isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '';
+        if ( isset( $branding_opts['remove_wp_tools'] ) && $branding_opts['remove_wp_tools'] && ! $cancelled_branding ) {
+            remove_menu_page( 'tools.php' );
+            $pos = $uri ? stripos( $uri, 'tools.php' ) || stripos( $uri, 'import.php' ) || stripos( $uri, 'export.php' ) : false;
+            if ( false !== $pos ) {
+                wp_safe_redirect( get_option( 'siteurl' ) . '/wp-admin/index.php' );
             }
         }
         // if preserve branding and do not remove menus.
-        if (isset($branding_opts['remove_wp_setting']) && $branding_opts['remove_wp_setting'] && ! $cancelled_branding) {
-            remove_menu_page('options-general.php');
-            $pos = $uri ? (stripos($uri, 'options-general.php') || stripos($uri, 'options-writing.php') || stripos($uri, 'options-reading.php') || stripos($uri,
-                    'options-discussion.php') || stripos($uri, 'options-media.php') || stripos($uri, 'options-permalink.php')) : false;
-            if (false !== $pos) {
-                wp_safe_redirect(get_option('siteurl').'/wp-admin/index.php');
+        if ( isset( $branding_opts['remove_wp_setting'] ) && $branding_opts['remove_wp_setting'] && ! $cancelled_branding ) {
+            remove_menu_page( 'options-general.php' );
+            $pos = $uri ? ( stripos( $uri, 'options-general.php' ) || stripos( $uri, 'options-writing.php' ) || stripos( $uri, 'options-reading.php' ) || stripos( $uri, 'options-discussion.php' ) || stripos( $uri, 'options-media.php' ) || stripos( $uri, 'options-permalink.php' ) ) : false;
+            if ( false !== $pos ) {
+                wp_safe_redirect( get_option( 'siteurl' ) . '/wp-admin/index.php' );
                 exit();
             }
         }
 
-        if (isset($branding_opts['remove_permalink']) && $branding_opts['remove_permalink'] && ! $cancelled_branding) {
-            remove_submenu_page('options-general.php', 'options-permalink.php');
-            $pos = $uri ? stripos($uri, 'options-permalink.php') : false;
-            if (false !== $pos) {
-                wp_safe_redirect(get_option('siteurl').'/wp-admin/index.php');
+        if ( isset( $branding_opts['remove_permalink'] ) && $branding_opts['remove_permalink'] && ! $cancelled_branding ) {
+            remove_submenu_page( 'options-general.php', 'options-permalink.php' );
+            $pos = $uri ? stripos( $uri, 'options-permalink.php' ) : false;
+            if ( false !== $pos ) {
+                wp_safe_redirect( get_option( 'siteurl' ) . '/wp-admin/index.php' );
                 exit();
             }
         }
 
         $remove_all_child_menu = false;
-        if (isset($branding_opts['remove_setting']) && isset($branding_opts['remove_restore']) && isset($branding_opts['remove_server_info']) && $branding_opts['remove_setting'] && $branding_opts['remove_restore'] && $branding_opts['remove_server_info']) {
+        if ( isset( $branding_opts['remove_setting'] ) && isset( $branding_opts['remove_restore'] ) && isset( $branding_opts['remove_server_info'] ) && $branding_opts['remove_setting'] && $branding_opts['remove_restore'] && $branding_opts['remove_server_info'] ) {
             $remove_all_child_menu = true;
         }
 
         // if preserve branding and do not hide menus.
-        if ((! $remove_all_child_menu && 'T' !== $is_hide) || $cancelled_branding) {
+        if ( ( ! $remove_all_child_menu && 'T' !== $is_hide ) || $cancelled_branding ) {
 
-            $branding_header = isset($branding_opts['branding_header']) ? $branding_opts['branding_header'] : [];
-            if ((is_array($branding_header) && ! empty($branding_header['name'])) && ! $cancelled_branding) {
-                static::$brandingTitle = stripslashes($branding_header['name']);
-                $child_menu_title = stripslashes($branding_header['name']);
-                $child_page_title = $child_menu_title.' Settings';
+            $branding_header = isset( $branding_opts['branding_header'] ) ? $branding_opts['branding_header'] : array();
+            if ( ( is_array( $branding_header ) && ! empty( $branding_header['name'] ) ) && ! $cancelled_branding ) {
+                static::$brandingTitle = stripslashes( $branding_header['name'] );
+                $child_menu_title      = stripslashes( $branding_header['name'] );
+                $child_page_title      = $child_menu_title . ' Settings';
             } else {
                 $child_menu_title = 'WPDash Child';
                 $child_page_title = 'WPDash Child Settings';
             }
-            $this->init_pages($child_menu_title, $child_page_title);
+            $this->init_pages( $child_menu_title, $child_page_title );
         }
     }
 
     /**
      * Initiate MainWP Child Plugin pages.
      *
-     * @param  string  $child_menu_title  New MainWP Child Plugin title defined in branding settings.
-     * @param  string  $child_page_title  New MainWP Child Plugin page title defined in branding settings.
+     * @param string $child_menu_title New MainWP Child Plugin title defined in branding settings.
+     * @param string $child_page_title New MainWP Child Plugin page title defined in branding settings.
      *
      * @uses \MainWP\Child\MainWP_Clone_Page::get_class_name()
      */
-    private function init_pages($child_menu_title, $child_page_title)
-    { //phpcs:ignore -- NOSONAR - complex.
+    private function init_pages( $child_menu_title, $child_page_title ) { //phpcs:ignore -- NOSONAR - complex.
 
         $settingsPage = add_submenu_page('options-general.php', $child_page_title, $child_menu_title, 'manage_options', 'wpdash_child_tab',
             [&$this, 'render_pages']);
 
-        add_action('admin_print_scripts-'.$settingsPage, [MainWP_Clone_Page::get_class_name(), 'print_scripts']);
+        add_action( 'admin_print_scripts-' . $settingsPage, array( MainWP_Clone_Page::get_class_name(), 'print_scripts' ) );
 
-        $sub_pages = [];
+        $sub_pages = array();
 
-        $all_subpages = apply_filters_deprecated('mainwp-child-init-subpages', [[]], '4.0.7.1', 'mainwp_child_init_subpages'); // NOSONAR - no IP.
-        $all_subpages = apply_filters('mainwp_child_init_subpages', $all_subpages);
+        $all_subpages = apply_filters_deprecated( 'mainwp-child-init-subpages', array( array() ), '4.0.7.1', 'mainwp_child_init_subpages' ); // NOSONAR - no IP.
+        $all_subpages = apply_filters( 'mainwp_child_init_subpages', $all_subpages );
 
-        if (! is_array($all_subpages)) {
-            $all_subpages = [];
+        if ( ! is_array( $all_subpages ) ) {
+            $all_subpages = array();
         }
 
-        if (! static::$subPagesLoaded) {
-            foreach ($all_subpages as $page) {
-                $slug = isset($page['slug']) ? $page['slug'] : '';
-                if (empty($slug)) {
+        if ( ! static::$subPagesLoaded ) {
+            foreach ( $all_subpages as $page ) {
+                $slug = isset( $page['slug'] ) ? $page['slug'] : '';
+                if ( empty( $slug ) ) {
                     continue;
                 }
-                $subpage = [];
-                $subpage['slug'] = $slug;
+                $subpage          = array();
+                $subpage['slug']  = $slug;
                 $subpage['title'] = $page['title'];
-                $subpage['page'] = 'mainwp-'.str_replace(' ', '-', strtolower(str_replace('-', ' ', $slug)));
-                if (isset($page['callback'])) {
+                $subpage['page']  = 'mainwp-' . str_replace( ' ', '-', strtolower( str_replace( '-', ' ', $slug ) ) );
+                if ( isset( $page['callback'] ) ) {
                     $subpage['callback'] = $page['callback'];
-                    $created_page = add_submenu_page('options-general.php', $subpage['title'], '<div class="mainwp-hidden">'.$subpage['title'].'</div>',
-                        'manage_options', $subpage['page'], $subpage['callback']);
-                    if (isset($page['load_callback'])) {
+                    $created_page        = add_submenu_page( 'options-general.php', $subpage['title'], '<div class="mainwp-hidden">' . $subpage['title'] . '</div>', 'manage_options', $subpage['page'], $subpage['callback'] );
+                    if ( isset( $page['load_callback'] ) ) {
                         $subpage['load_callback'] = $page['load_callback'];
-                        add_action('load-'.$created_page, $subpage['load_callback']);
+                        add_action( 'load-' . $created_page, $subpage['load_callback'] );
                     }
                 }
                 $sub_pages[] = $subpage;
             }
-            static::$subPages = $sub_pages;
+            static::$subPages       = $sub_pages;
             static::$subPagesLoaded = true;
         }
-        add_action('mainwp-child-pageheader', [__CLASS__, 'render_header']);
-        add_action('mainwp-child-pagefooter', [__CLASS__, 'render_footer']);
+        add_action( 'mainwp-child-pageheader', array( __CLASS__, 'render_header' ) );
+        add_action( 'mainwp-child-pagefooter', array( __CLASS__, 'render_footer' ) );
 
         /**
          * WordPress submenu array.
@@ -247,10 +235,10 @@ class MainWP_Pages
          */
         global $submenu;
 
-        if (isset($submenu['options-general.php'])) {
-            foreach ($submenu['options-general.php'] as $index => $item) {
-                if ('mainwp-reports-page' === $item[2] || 'mainwp-reports-settings' === $item[2]) {
-                    unset($submenu['options-general.php'][$index]);
+        if ( isset( $submenu['options-general.php'] ) ) {
+            foreach ( $submenu['options-general.php'] as $index => $item ) {
+                if ( 'mainwp-reports-page' === $item[2] || 'mainwp-reports-settings' === $item[2] ) {
+                    unset( $submenu['options-general.php'][ $index ] );
                 }
             }
         }
@@ -259,13 +247,12 @@ class MainWP_Pages
     /**
      * MainWP Child Plugin meta data.
      *
-     * @param  array  $plugin_meta  Plugin meta.
-     * @param  string  $plugin_file  Plugin file.
+     * @param array  $plugin_meta Plugin meta.
+     * @param string $plugin_file Plugin file.
      *
      * @return mixed The filtered value after all hooked functions are applied to it.
      */
-    public function plugin_row_meta($plugin_meta, $plugin_file)
-    {
+    public function plugin_row_meta( $plugin_meta, $plugin_file ) {
 
         /**
          * MainWP Child instance.
@@ -274,10 +261,10 @@ class MainWP_Pages
          */
         global $mainWPChild;
 
-        if ($mainWPChild->plugin_slug !== $plugin_file) {
+        if ( $mainWPChild->plugin_slug !== $plugin_file ) {
             return $plugin_meta;
         }
-        return apply_filters('mainwp_child_plugin_row_meta', $plugin_meta, $plugin_file, $mainWPChild->plugin_slug);
+        return apply_filters( 'mainwp_child_plugin_row_meta', $plugin_meta, $plugin_file, $mainWPChild->plugin_slug );
     }
 
     /**
@@ -290,24 +277,23 @@ class MainWP_Pages
      * @uses \MainWP\Child\MainWP_Clone_Page::render_normal_restore()
      * @uses \MainWP\Child\MainWP_Clone_Page::render_restore()
      */
-    public function render_pages()
-    { // phpcs:ignore -- NOSONAR - Current complexity is the only way to achieve desired results, pull request solutions appreciated.
-        $shownPage = isset($_GET['tab']) ? sanitize_text_field(wp_unslash($_GET['tab'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification
+    public function render_pages() { // phpcs:ignore -- NOSONAR - Current complexity is the only way to achieve desired results, pull request solutions appreciated.
+        $shownPage     = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification
         $branding_opts = MainWP_Child_Branding::instance()->get_branding_options();
 
-        $hide_settings = isset($branding_opts['remove_setting']) && $branding_opts['remove_setting'] ? true : false;
-        $hide_restore = isset($branding_opts['remove_restore']) && $branding_opts['remove_restore'] ? true : false;
-        $hide_server_info = isset($branding_opts['remove_server_info']) && $branding_opts['remove_server_info'] ? true : false;
-        $hide_connection_detail = isset($branding_opts['remove_connection_detail']) && $branding_opts['remove_connection_detail'] ? true : false;
+        $hide_settings          = isset( $branding_opts['remove_setting'] ) && $branding_opts['remove_setting'] ? true : false;
+        $hide_restore           = isset( $branding_opts['remove_restore'] ) && $branding_opts['remove_restore'] ? true : false;
+        $hide_server_info       = isset( $branding_opts['remove_server_info'] ) && $branding_opts['remove_server_info'] ? true : false;
+        $hide_connection_detail = isset( $branding_opts['remove_connection_detail'] ) && $branding_opts['remove_connection_detail'] ? true : false;
 
-        if ('' === $shownPage) {
-            if (! $hide_settings) {
-                $shownPage = 'settings';
-            } elseif (! $hide_restore) {
+        if ( '' === $shownPage ) {
+            if ( ! $hide_settings ) {
+                    $shownPage = 'settings';
+            } elseif ( ! $hide_restore ) {
                 $shownPage = 'restore-clone';
-            } elseif (! $hide_server_info) {
+            } elseif ( ! $hide_server_info ) {
                 $shownPage = 'server-info';
-            } elseif (! $hide_connection_detail) {
+            } elseif ( ! $hide_connection_detail ) {
                 $shownPage = 'connection-detail';
             }
         }
@@ -319,45 +305,45 @@ class MainWP_Pages
         }
 
         ?>
-        <?php if (! $hide_settings) { ?>
-        <div class="mainwp-child-setting-tab settings" <?php echo 'settings' !== $shownPage ? 'style="display:none"' : ''; ?>>
-            <?php $this->render_settings(); ?>
-        </div>
-    <?php } ?>
+        <?php if ( ! $hide_settings ) { ?>
+            <div class="mainwp-child-setting-tab settings" <?php echo 'settings' !== $shownPage ? 'style="display:none"' : ''; ?>>
+                <?php $this->render_settings(); ?>
+            </div>
+        <?php } ?>
 
         <?php
-        if (! $hide_restore && $show_clones) {
+        if ( ! $hide_restore && $show_clones ) {
             $fsmethod = MainWP_Child_Server_Information_Base::get_file_system_method();
-            if ('direct' === $fsmethod) { // to fix error some case of file system method is not direct.
+            if ( 'direct' === $fsmethod ) { // to fix error some case of file system method is not direct.
                 ?>
-                <div class="mainwp-child-setting-tab restore-clone" <?php echo 'restore-clone' !== $shownPage ? 'style="display:none"' : ''; ?>>
-                    <?php
-                    if (isset($_SESSION['file'])) {
-                        MainWP_Clone_Page::render_restore();
+            <div class="mainwp-child-setting-tab restore-clone" <?php echo 'restore-clone' !== $shownPage ? 'style="display:none"' : ''; ?>>
+                <?php
+                if ( isset( $_SESSION['file'] ) ) {
+                    MainWP_Clone_Page::render_restore();
+                } else {
+                    $sitesToClone = get_option( 'mainwp_child_clone_sites' );
+                    if ( 0 !== (int) $sitesToClone ) {
+                        MainWP_Clone_Page::render();
                     } else {
-                        $sitesToClone = get_option('mainwp_child_clone_sites');
-                        if (0 !== (int) $sitesToClone) {
-                            MainWP_Clone_Page::render();
-                        } else {
-                            MainWP_Clone_Page::render_normal_restore();
-                        }
+                        MainWP_Clone_Page::render_normal_restore();
                     }
-                    ?>
-                </div>
+                }
+                ?>
+            </div>
             <?php } ?>
         <?php } ?>
 
-        <?php if (! $hide_server_info) { ?>
-        <div class="mainwp-child-setting-tab server-info" <?php echo 'server-info' !== $shownPage ? 'style="display:none"' : ''; ?>>
-            <?php MainWP_Child_Server_Information::render_page(); ?>
-        </div>
-    <?php } ?>
+        <?php if ( ! $hide_server_info ) { ?>
+            <div class="mainwp-child-setting-tab server-info" <?php echo 'server-info' !== $shownPage ? 'style="display:none"' : ''; ?>>
+                <?php MainWP_Child_Server_Information::render_page(); ?>
+            </div>
+        <?php } ?>
 
-        <?php if (! $hide_connection_detail) { ?>
-        <div class="mainwp-child-setting-tab connection-detail" <?php echo 'connection-detail' !== $shownPage ? 'style="display:none"' : ''; ?>>
-            <?php MainWP_Child_Server_Information::render_connection_details(); ?>
-        </div>
-    <?php } ?>
+            <?php if ( ! $hide_connection_detail ) { ?>
+            <div class="mainwp-child-setting-tab connection-detail" <?php echo 'connection-detail' !== $shownPage ? 'style="display:none"' : ''; ?>>
+                    <?php MainWP_Child_Server_Information::render_connection_details(); ?>
+            </div>
+        <?php } ?>
         <?php
         static::render_footer();
     }
@@ -365,55 +351,54 @@ class MainWP_Pages
     /**
      * Render page header.
      *
-     * @param  string  $shownPage  Page shown.
-     * @param  bool  $subpage  Whether or not a subpage. Default: true.
-     * @param  bool  $show_clone_funcs  Whether or not to show clone tabs.
+     * @param string $shownPage Page shown.
+     * @param bool   $subpage Whether or not a subpage. Default: true.
+     * @param bool   $show_clone_funcs Whether or not to show clone tabs.
      *
      * @uses \MainWP\Child\MainWP_Child_Branding::get_branding_options()
      */
-    public static function render_header($shownPage, $subpage = true, &$show_clone_funcs = true)
-    { // phpcs:ignore -- NOSONAR - Current complexity is the only way to achieve desired results, pull request solutions appreciated.
-        $tab = isset($_GET['tab']) ? sanitize_text_field(wp_unslash($_GET['tab'])) : ''; // phpcs:ignore WordPress.Security.NonceVerification
+    public static function render_header( $shownPage, $subpage = true, &$show_clone_funcs = true ) { // phpcs:ignore -- NOSONAR - Current complexity is the only way to achieve desired results, pull request solutions appreciated.
+        $tab = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification
 
-        if (! empty($tab)) {
+        if ( ! empty( $tab ) ) {
             $shownPage = $tab;
         }
 
-        if (empty($shownPage)) {
+        if ( empty( $shownPage ) ) {
             $shownPage = 'settings';
         }
 
         $branding_opts = MainWP_Child_Branding::instance()->get_branding_options();
 
-        $hide_settings = isset($branding_opts['remove_setting']) && $branding_opts['remove_setting'] ? true : false;
-        $hide_restore = isset($branding_opts['remove_restore']) && $branding_opts['remove_restore'] ? true : false;
-        $hide_server_info = isset($branding_opts['remove_server_info']) && $branding_opts['remove_server_info'] ? true : false;
-        $hide_connection_detail = isset($branding_opts['remove_connection_detail']) && $branding_opts['remove_connection_detail'] ? true : false;
+        $hide_settings          = isset( $branding_opts['remove_setting'] ) && $branding_opts['remove_setting'] ? true : false;
+        $hide_restore           = isset( $branding_opts['remove_restore'] ) && $branding_opts['remove_restore'] ? true : false;
+        $hide_server_info       = isset( $branding_opts['remove_server_info'] ) && $branding_opts['remove_server_info'] ? true : false;
+        $hide_connection_detail = isset( $branding_opts['remove_connection_detail'] ) && $branding_opts['remove_connection_detail'] ? true : false;
 
-        $sitesToClone = get_option('mainwp_child_clone_sites');
+        $sitesToClone = get_option( 'mainwp_child_clone_sites' );
 
         // put here to support hooks to show header.
         $is_connected_admin = false;
-        $connected = ! empty(get_option('mainwp_child_pubkey')) ? true : false;
-        if ($connected) {
+        $connected          = ! empty( get_option( 'mainwp_child_pubkey' ) ) ? true : false;
+        if ( $connected ) {
             $current_user = wp_get_current_user();
-            if ($current_user) {
-                $is_connected_admin = get_option('mainwp_child_connected_admin') === $current_user->user_login ? true : false;
+            if ( $current_user ) {
+                $is_connected_admin = get_option( 'mainwp_child_connected_admin' ) === $current_user->user_login ? true : false;
             }
         }
         $show_clone_funcs = $connected && $is_connected_admin ? true : false;
 
         ?>
         <style type="text/css">
-            .mainwp-tabs {
+            .mainwp-tabs
+            {
                 margin-top: 2em;
                 border-bottom: 1px solid #e5e5e5;
             }
 
             #mainwp-tabs {
-                clear: both;
+                clear: both ;
             }
-
             #mainwp-tabs .nav-tab-active {
                 background: #fafafa;
                 border-top: 1px solid #7fb100 !important;
@@ -526,26 +511,26 @@ class MainWP_Pages
         </div>
         <div style="clear:both;"></div>
         <script type="text/javascript">
-            jQuery(document).ready(function () {
-                $hideMenu = jQuery('#menu-settings li a .mainwp-hidden');
-                $hideMenu.each(function () {
-                    jQuery(this).closest('li').hide();
-                });
+            jQuery( document ).ready( function () {
+                $hideMenu = jQuery( '#menu-settings li a .mainwp-hidden' );
+                $hideMenu.each( function() {
+                    jQuery( this ).closest( 'li' ).hide();
+                } );
 
-                var $tabs = jQuery('.mainwp-tabs');
+                var $tabs = jQuery( '.mainwp-tabs' );
 
-                $tabs.on('click', 'a', function () {
-                    if (jQuery(this).attr('href') !== '#')
+                $tabs.on( 'click', 'a', function () {
+                    if ( jQuery( this ).attr( 'href' ) !=='#' )
                         return true;
 
-                    jQuery('.mainwp-tabs > a').removeClass('nav-tab-active');
-                    jQuery(this).addClass('nav-tab-active');
-                    jQuery('.mainwp-child-setting-tab').hide();
-                    var _tab = jQuery(this).attr('tab-slug');
-                    jQuery('.mainwp-child-setting-tab.' + _tab).show();
+                    jQuery( '.mainwp-tabs > a' ).removeClass( 'nav-tab-active' );
+                    jQuery( this ).addClass( 'nav-tab-active' );
+                    jQuery( '.mainwp-child-setting-tab' ).hide();
+                    var _tab = jQuery( this ).attr( 'tab-slug' );
+                    jQuery( '.mainwp-child-setting-tab.' + _tab ).show();
                     return false;
-                });
-            });
+                } );
+            } );
         </script>
 
         <div id="mainwp_wrap-inside">
@@ -556,8 +541,7 @@ class MainWP_Pages
     /**
      * Render page footer.
      */
-    public static function render_footer()
-    {
+    public static function render_footer() {
         ?>
         </div>
         </div>
@@ -567,9 +551,8 @@ class MainWP_Pages
     /**
      * Render admin header.
      */
-    public function admin_head()
-    {
-        if (isset($_GET['page']) && 'wpdash_child_tab' === $_GET['page']) { // phpcs:ignore WordPress.Security.NonceVerification
+    public function admin_head() {
+        if ( isset( $_GET['page'] ) && 'mainwp_child_tab' === $_GET['page'] ) { // phpcs:ignore WordPress.Security.NonceVerification
             ?>
             <style type="text/css">
                 .mainwp-postbox-actions-top {
@@ -578,9 +561,8 @@ class MainWP_Pages
                     border-bottom: 1px solid #ddd;
                     background: #f5f5f5;
                 }
-
                 h3.mainwp_box_title {
-                    font-family: "Open Sans", sans-serif;
+                    font-family: "Open Sans",sans-serif;
                     font-size: 14px;
                     font-weight: 600;
                     line-height: 1.4;
@@ -588,8 +570,7 @@ class MainWP_Pages
                     padding: 8px 12px;
                     border-bottom: 1px solid #eee;
                 }
-
-                .mainwp-child-setting-tab.connection-detail .postbox .inside {
+                .mainwp-child-setting-tab.connection-detail .postbox .inside{
                     margin: 0;
                     padding: 0;
                 }
