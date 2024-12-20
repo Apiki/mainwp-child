@@ -72,7 +72,7 @@ class MainWP_Helper { //phpcs:ignore -- NOSONAR - multi methods.
         /**
          * Action: process send feedback message.
          *
-         * @since 6.1
+         * @since 5.1
          */
         do_action( 'mainwp_child_before_send_feedback_message', $value, $action );
 
@@ -535,6 +535,22 @@ class MainWP_Helper { //phpcs:ignore -- NOSONAR - multi methods.
             include_once ABSPATH . WPINC . '/pluggable.php'; // NOSONAR -- WP compatible.
         }
         return \wp_generate_password( $length, false );
+    }
+
+    /**
+     * Method rand_str_key()
+     *
+     * Generates a random string to be used when generating the consumer key and secret.
+     *
+     * @return string Returns.
+     */
+    public static function rand_str_key() {
+
+        if ( ! function_exists( 'openssl_random_pseudo_bytes' ) ) {
+            return sha1( wp_rand() ); // NOSONAR - safe for keys.
+        }
+
+        return bin2hex( openssl_random_pseudo_bytes( 20 ) ); // @codingStandardsIgnoreLine
     }
 
     /**
