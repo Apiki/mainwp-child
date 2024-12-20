@@ -262,7 +262,7 @@ class MainWP_Child_Server_Information_Base { //phpcs:ignore -- NOSONAR - multi m
             return $api->version;
         }*/
 
-		return '6.2';
+		return '6.3.1';
     }
 
     /**
