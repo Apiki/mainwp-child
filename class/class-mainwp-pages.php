@@ -469,10 +469,11 @@ class MainWP_Pages {
 
             #mainwp-child-settings-page-navigation .nav-tab:hover {
                 background: #3a4c58;
+                color: #FED502FF;
             }
 
             #mainwp-child-settings-page-navigation .nav-tab-active {
-                background: #4682b4;
+                background: #FED502FF;
             }
 
             .mainwp-hidden {
@@ -522,7 +523,7 @@ class MainWP_Pages {
             }
 
             .mainwp-toggle input:checked + .mainwp-slider {
-                background: #7fb100;
+                background: #FED502FF;
             }
 
             .mainwp-toggle input:checked + .mainwp-slider:before {
@@ -532,28 +533,30 @@ class MainWP_Pages {
             }
 
             .mainwp-button {
-                background-color: #7fb100;
+                background-color: #FED502FF;
                 border: none;
-                color: #ffffff !important;
+                color: #000000 !important;
                 border-radius: 15px;
                 padding: 0.78571429em 1.5em 0.78571429em;
                 cursor: pointer;
                 font-weight: bolder;
                 font-size:1em;
+                text-decoration: none;
             }
 
             .mainwp-basic-button {
-                background-color: #4682b4;
+                background-color: #FED502FF;
                 border: none;
-                color: #ffffff !important;
+                color: #000000 !important;
                 border-radius: 15px;
                 padding: 0.78571429em 1.5em 0.78571429em;
                 cursor: pointer;
                 font-weight: bolder;
                 font-size:1em;
+                text-decoration: none;
             }
             .mainwp-basic-button:disabled {
-                background-color: #4682b4;
+                background-color: #FED502FF;
                 opacity: 0.45;
             }
 
@@ -569,6 +572,17 @@ class MainWP_Pages {
                 border: 1px solid rgba(34, 36, 38, 0.15) !important;
                 color: rgba(0, 0, 0, 0.87);
                 border-radius: 0.28571429rem !important;
+            }
+
+            .mainwp-style-border {
+                border: 1px dashed #e5e5e5;
+                background: #1c1d1b;
+                font-size: 14px;
+                font-weight: bold;
+                padding: 1em 1em;
+                margin: 1em;
+                overflow-wrap: break-word;
+                color: #fed502;
             }
 
         </style>
@@ -740,7 +754,7 @@ class MainWP_Pages {
                     <tbody>
                         <tr>
                             <th scope="row" style="width:300px"><?php esc_html_e( 'Your unique security ID is:', 'mainwp-child' ); ?></th>
-                            <td><?php echo '<code>' . esc_html( get_option( 'mainwp_child_uniqueId' ) ) . '</code>'; ?></td>
+                            <td><?php echo '<code class="mainwp-style-border">' . esc_html( get_option( 'mainwp_child_uniqueId' ) ) . '</code>'; ?></td>
                         <tr>
                     </tbody>
                 </table>
@@ -764,7 +778,11 @@ class MainWP_Pages {
             </table>
 
                     <div>
-
+            <p class="submit">
+                <input type="submit" name="submit" id="submit" class="mainwp-button" value="<?php esc_attr_e('Save Settings', 'mainwp-child'); ?>">
+            </p>
+            <input type="hidden" name="nonce" value="<?php echo esc_attr(wp_create_nonce('child-settings')); ?>">
+            </form>
 
             <header class="section-header">
                 <h3><?php esc_html_e( 'Repository SSH', 'mainwp-child' ); ?></h3>
@@ -772,7 +790,7 @@ class MainWP_Pages {
             </header>
                                 <?php if ($sshKey): ?>
                 <p><?php esc_html_e( 'Copy and add ssh key in repository to enable secure authentication and synchronization.', 'mainwp-child' ); ?></p>
-                                    <div style="border: 1px dashed #e5e5e5; background: #1c1d1b; font-size: 14px; font-weight: bold; padding: 1em 1em; margin: 1em; overflow-wrap: break-word; color: #fed502;">
+                                    <div class="mainwp-style-border">
                                         <?php echo MainWP_Repository::decodeKey($sshKey); ?>
                                     </div>
                                     <div style="text-align: right; margin-bottom: 5px; margin-right: 1.5em; font-size: 11px; color: #000; font-weight: bold;">
@@ -786,18 +804,15 @@ class MainWP_Pages {
                     <div class="howto" style="color: #ff2222; font-weight: bold;">
                         <?php esc_html_e('The repository is already configured, deactivate the plug and activate it again to configure.',
                             'mainwp-child'); ?></div>
-
             </div>
+
+        <?php if ($pubhKey && $uniqueId) : ?>
             <p class="submit">
-                <input type="submit" name="submit" id="submit" class="mainwp-button" value="<?php esc_attr_e( 'Save Settings', 'mainwp-child' ); ?>">
-                        <?php if ($pubhKey && $uniqueId) : ?>
-                            <a href="<?php \get_admin_url(); ?>options-general.php?page=wpdash_child_tab&function=generate_manual"
-                               class="mainwp-button"> Update SSH</a>
-                        <?php endif; ?>
-                    </p>
-                    <input type="hidden" name="nonce" value="<?php echo esc_attr(wp_create_nonce('child-settings')); ?>">
-            </form>
-        <br/>
+                <a href="<?php \get_admin_url(); ?>options-general.php?page=wpdash_child_tab&function=generate_manual"
+                   class="mainwp-button"> Update SSH</a>
+            </p>
+        <?php endif; ?>
+
         <header class="section-header">
             <h3><?php esc_html_e( 'Site Connection Management', 'mainwp-child' ); ?></h3>
             <hr/>
