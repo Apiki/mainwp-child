@@ -13,7 +13,7 @@
  * Author URI: https://apiki.com
  * Text Domain: mainwp-child
  * Version: 6.3.1
- * Requires at least: 6.7.1
+ * Requires at least: 5.4
  * Requires PHP: 7.4
  */
 
