@@ -12,84 +12,29 @@
  * Author: Apiki
  * Author URI: https://apiki.com
  * Text Domain: mainwp-child
- * Version: 6.3.1
+ * Version: 6.3.2
  * Requires at least: 5.4
  * Requires PHP: 7.4
  */
 
-require_once ABSPATH . 'wp-includes' . DIRECTORY_SEPARATOR . 'version.php'; // NOSONAR - WP compatible. Version information from WordPress.
-
-/**
- * Define MainWP Child Plugin Debug Mode.
- *
- * @const ( bool ) Whether or not MainWP Child is in debug mode. Default: false.
- * @source https://code-reference.mainwp.com/classes/MainWP.Child.MainWP_Child.html
- */
-if ( ! defined( 'MAINWP_CHILD_DEBUG' ) ) {
-    define( 'MAINWP_CHILD_DEBUG', false );
-}
-
-if ( ! defined( 'MAINWP_CHILD_FILE' ) ) {
-
-    /**
-     * Define MainWP Child Plugin absolute full path and filename of this file.
-     *
-     * @const ( string ) Defined MainWP Child file path.
-     * @source https://github.com/mainwp/mainwp-child/blob/master/mainwp-child.php
-     */
-    define( 'MAINWP_CHILD_FILE', __FILE__ );
-}
-
-if ( ! defined( 'MAINWP_CHILD_PLUGIN_DIR' ) ) {
-
-    /**
-     * Define MainWP Child Plugin Directory.
-     *
-     * @const ( string ) Defined MainWP Child Plugin Directory.
-     * @source https://github.com/mainwp/mainwp-child/blob/master/mainwp-child.php
-     */
-    define( 'MAINWP_CHILD_PLUGIN_DIR', plugin_dir_path( MAINWP_CHILD_FILE ) );
-}
-
-if ( ! defined( 'MAINWP_CHILD_URL' ) ) {
-
-    /**
-     * Define MainWP Child Plugin URL.
-     *
-     * @const ( string ) Defined MainWP Child Plugin URL.
-     * @source https://github.com/mainwp/mainwp-child/blob/master/mainwp-child.php
-     */
-    define( 'MAINWP_CHILD_URL', plugin_dir_url( MAINWP_CHILD_FILE ) );
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Acesso direto negado.
 }
 
 /**
- * MainWP Child Plugin Autoloader to load all other class files.
+ * Desativa este plugin automaticamente.
  *
- * @param string $class_name Name of the class to load.
+ * Esta versão não contém mais funcionalidade. Ao ser atualizada, o plugin
+ * se desativa sozinho no primeiro carregamento do admin.
  *
- * @uses \MainWP\Child\MainWP_Child()
+ * @return void
  */
-function mainwp_child_autoload( $class_name ) {
-
-    if ( 0 === strpos( $class_name, 'MainWP\Child' ) ) {
-        // strip the namespace prefix: MainWP\Child\ .
-        $class_name = substr( $class_name, 13 );
+function wpdash_child_self_deactivate() {
+    if ( ! function_exists( 'deactivate_plugins' ) ) {
+        require_once ABSPATH . 'wp-admin/includes/plugin.php'; // NOSONAR - WP compatible.
     }
 
-    $autoload_dir  = \trailingslashit( __DIR__ . '/class' );
-    $autoload_path = sprintf( '%sclass-%s.php', $autoload_dir, strtolower( str_replace( '_', '-', $class_name ) ) );
-
-    if ( file_exists( $autoload_path ) ) {
-        require_once $autoload_path; // NOSONAR - WP compatible.
-    }
+    deactivate_plugins( plugin_basename( __FILE__ ), true );
 }
 
-if ( function_exists( 'spl_autoload_register' ) ) {
-    spl_autoload_register( 'mainwp_child_autoload' );
-}
-
-require_once MAINWP_CHILD_PLUGIN_DIR . 'includes' . DIRECTORY_SEPARATOR . 'functions.php'; // NOSONAR - WP compatible.
-
-$mainWPChild = new MainWP\Child\MainWP_Child( WP_PLUGIN_DIR . DIRECTORY_SEPARATOR . plugin_basename( __FILE__ ) );
-register_activation_hook( __FILE__, array( $mainWPChild, 'activation' ) );
-register_deactivation_hook( __FILE__, array( $mainWPChild, 'deactivation' ) );
+add_action( 'admin_init', 'wpdash_child_self_deactivate' );
